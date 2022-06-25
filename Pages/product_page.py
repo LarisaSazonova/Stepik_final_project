@@ -1,4 +1,3 @@
-from math import prod
 from .base_page import BasePage
 from .locators import ProductPageLocators
 
@@ -26,3 +25,8 @@ class ProductPage(BasePage):
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
         assert price_in_basket_total_message.text == product_price.text, "Basket total is not equal to product price"
 
+    def check_success_message_didnt_appear(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE_ALERT), "Success message appears, but should not"
+
+    def check_success_message_disappears_after_adding_product_to_basket(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE_ALERT), "Success message doesn't disappear, but should do"
