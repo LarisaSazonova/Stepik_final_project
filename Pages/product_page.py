@@ -13,16 +13,16 @@ class ProductPage(BasePage):
         assert "has been added to your basket" in success_message.text, "No message about adding product item to the basket"
 
     def validate_product_name_in_message(self):
-        success_message = self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE_ALERT)
+        product_name_in_success_message = self.browser.find_element(*ProductPageLocators.PRODCUT_NAME_IN_SUCCESS_MESSAGE_ALERT)
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME)
-        assert product_name.text in success_message.text, "Product name is not in the message"
+        assert product_name_in_success_message.text == product_name.text, "Product name in the message is not equal product name added to basket"
 
     def check_basket_total_message_appeared(self):
-        basket_total_message = self.browser.find_element(*ProductPageLocators.BASKET_TOTAL_MESSAGE_ALERT)
-        assert "Your basket total is" in basket_total_message.text, "No message about basket total"
+        basket_total_message = self.browser.find_element(*ProductPageLocators.BASKET_MESSAGE_ALERT)
+        assert "Your basket total is now" in basket_total_message.text, "No message about basket total"
 
     def validate_basket_total_amount(self):
-        basket_total_message = self.browser.find_element(*ProductPageLocators.BASKET_TOTAL_MESSAGE_ALERT)
+        price_in_basket_total_message = self.browser.find_element(*ProductPageLocators.BASKET_TOTAL_IN_BASKET_MESSAGE_ALERT)
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE)
-        assert product_price.text in basket_total_message.text, "Basket total is not equal to product price"
+        assert price_in_basket_total_message.text == product_price.text, "Basket total is not equal to product price"
 
