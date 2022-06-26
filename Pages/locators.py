@@ -18,9 +18,10 @@ class ProductPageLocators():
 
 class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 class BasketPageLocators():
     BASKET_LINK = (By.CSS_SELECTOR, "#default > header > div.page_inner > div > div.basket-mini.pull-right.hidden-xs > span > a")
     BASKET_EMPTY_MESSAGE = (By.CSS_SELECTOR, "#content_inner > p")
     ITEMS_TO_BUY = (By.CSS_SELECTOR, "#basket_formset.basket_summary")
-    
+
