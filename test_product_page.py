@@ -1,13 +1,13 @@
 import pytest
-from selenium.webdriver.common.by import By
 from .Pages.product_page import ProductPage
+from .Pages.basket_page import BasketPage 
 
 # Проверяем сценарий добавления товара в корзину со страницы товара. 
 # Ожидаемый результат: 
 # 1)Cообщение о том, что товар добавлен в корзину. Название товара в сообщении должно совпадать с тем товаром, который вы действительно добавили.
 # 2)Сообщение со стоимостью корзины. Стоимость корзины совпадает с ценой товара. 
 
-
+@pytest.mark.skip
 def test_guest_can_add_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
     page = ProductPage(browser, link)
@@ -46,6 +46,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     page.solve_quiz_and_get_code()  #для получения проверочного кода
     page.check_success_message_didnt_appear()
 
+@pytest.mark.skip
 def test_guest_cant_see_success_message(browser):
     link ="http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1"
     page = ProductPage(browser, link)
@@ -61,15 +62,28 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     page.solve_quiz_and_get_code()  #для получения проверочного кода
     page.check_success_message_disappears_after_adding_product_to_basket()
 
+@pytest.mark.skip
 def test_guest_should_see_login_link_on_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
     page.should_be_login_link()
 
+@pytest.mark.skip
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
     page.open()
     page.go_to_login_page()
+
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_basket_page()
+    basket_page = BasketPage(browser, browser.current_url)
+    basket_page.check_basket_is_empty()
+    basket_page.check_message_basket_is_empty_appeared()
+
     
